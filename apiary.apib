@@ -1,0 +1,38 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# soil-moisture-sensor
+
+IOT soil moisture sensor. Sends information about specific house and 
+specific sensor on demand, identified by houseid and sensorid. 
+   If sensorid is not presented, then returns sensor values of all sensors
+of house identified by houseid.
+
+
+## Get Sensor Value [/house/{houseid}/sensor/{sensorid}]
+houseid and sensorid are integers, identifiers of house and sensor in 
+this house.
+
+### get one sensor value [GET]
+
++ Response 200 (application/json)
+
+        {
+            "sensorValue" : 27.234
+        }
+
+## Get Sensor Values [/house/{houseid}]
+houseid is integer, identifier of house.
+
+### get one sensor value [GET]
+
++ Response 200 (application/json)
+
+        {
+            "sensorValue" : 27.24,
+            "sensorValue" : 17.2244,
+            "sensorValue" : 37.4,
+            "sensorValue" : 18.01,
+            "sensorValue" : 24.909,
+            "sensorValue" : 12.7
+        }
