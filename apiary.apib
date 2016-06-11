@@ -1,12 +1,18 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
+
 # soil-moisture-sensor
 
 IOT soil moisture sensor. Sends information about specific house and 
 specific sensor on demand, identified by houseid and sensorid. 
    If sensorid is not presented, then returns sensor values of all sensors
 of house identified by houseid.
+
+## Ping [/ping]
+Ping service, simply returns 200 status code
+
++ Response 200 (application/json)
 
 
 ## Get Sensor Value [/house/{houseid}/sensor/{sensorid}]
