@@ -28,11 +28,23 @@ houseid is integer, identifier of house.
 
 + Response 200 (application/json)
 
-        {
-            "sensorValue" : 27.24,
-            "sensorValue" : 17.2244,
-            "sensorValue" : 37.4,
-            "sensorValue" : 18.01,
-            "sensorValue" : 24.909,
-            "sensorValue" : 12.7
+        {   
+            "sensors" : [
+                {
+                    "sendorid" : 15,
+                    "sensorvalue" : 24.22
+                },
+                {
+                    "sendorid" : 16,
+                    "sensorvalue" : 22.022
+                },
+                {
+                    "sendorid" : 17,
+                    "sensorvalue" : 17.02
+                },
+                {
+                    "sendorid" : 18,
+                    "sensorvalue" : 19.74
+                }
+            ]
         }
