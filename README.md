@@ -4,6 +4,7 @@ IoT მოწყობილობაზე შეერთებულია �
 ------------------------------
 
 [![Build Status](https://travis-ci.org/freeuni-sdp/iot-soil-moisture-sensor.svg?branch=master)](https://travis-ci.org/freeuni-sdp/iot-soil-moisture-sensor)
+
 |                   |                                 |
 |-------------------|---------------------------------|
 | API Documentation:| http://docs.sdp2.apiary.io/ |
