@@ -1,8 +1,6 @@
 package ge.edu.freeuni.sdp.iot.sensor.soil_moisture;
 
-import sun.management.Sensor;
-
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -23,4 +21,9 @@ public class HouseSensorData {
     public SensorValue get(Integer sensorid) {
         return data.get(sensorid);
     }
+
+    public Collection<SensorValue> getValues() {
+        return data.values();
+    }
+
 }

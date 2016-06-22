@@ -7,10 +7,24 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class HouseData {
 
+    /* Singleton instance */
+    private static HouseData instance;
+
     private ConcurrentHashMap<Integer, HouseSensorData> houseMap;
 
-    public HouseData() {
+    private HouseData() {
         this.houseMap = new ConcurrentHashMap<>();
+    }
+
+    public static HouseData getInstance() {
+        if (instance == null) {
+            synchronized (HouseData.class) {
+                if (instance == null)
+                    instance = new HouseData();
+            }
+        }
+
+        return instance;
     }
 
     public void put(Integer houseId, HouseSensorData data) {
