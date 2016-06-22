@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://iot-soil-moisture-sensor.herokuapp.com/
 
 # soil-moisture-sensor
 
@@ -8,23 +8,59 @@ specific sensor on demand, identified by houseid and sensorid.
    If sensorid is not presented, then returns sensor values of all sensors
 of house identified by houseid.
 
+## Ping [/ping]
+
+Ping service, simply returns 200 status code
+
++ Response 200 (application/json)
 
 ## Get Sensor Value [/house/{houseid}/sensor/{sensorid}]
+
 houseid and sensorid are integers, identifiers of house and sensor in 
 this house.
 
 ### get one sensor value [GET]
 
+If sensor is available returns with status code `200` and a `value`
+otherwise code is `503` with last recorded sensor value if available
+as `lastvalue`.
+
 + Response 200 (application/json)
 
         {
-            "sensorValue" : 27.234
+            "value" : 27.234
+        }
+
++ Response 503 (application/json)
+
+        {
+            "lastvalue": 15.5
+        }
+
++ Response 503 (application/json)
+
+        {
+            "lastvalue": null
         }
 
 ## Get Sensor Values [/house/{houseid}]
+
 houseid is integer, identifier of house.
 
-### get one sensor value [GET]
+### Get house sensor values [GET]
+
+Returnes list of sensor values.
+
+If `houseid` is wrong, return code will be `404` or if house
+not available `503`
+
+If sensor is available `available` will behave value `"yes"` 
+otherwise `"no"`
+
+If sensor is available it's value will be stored in `sensorvalue`
+
+If sensor is not available `lastvalue` will hold last recorded vaue
+or `null`
 
 + Response 200 (application/json)
 
@@ -32,19 +68,27 @@ houseid is integer, identifier of house.
             "sensors" : [
                 {
                     "sendorid" : 15,
-                    "sensorvalue" : 24.22
+                    "available" : "yes",
+                    "value" : 24.22
                 },
                 {
                     "sendorid" : 16,
-                    "sensorvalue" : 22.022
+                    "available" : "yes",
+                    "value" : 22.022
                 },
                 {
                     "sendorid" : 17,
-                    "sensorvalue" : 17.02
+                    "available" : "no",
+                    "lastvalue" : 17.02
                 },
                 {
                     "sendorid" : 18,
-                    "sensorvalue" : 19.74
+                    "available" : "no",
+                    "lastvalue" : null
                 }
             ]
         }
+
++ Response 404 (application/json)
+
++ Response 503 (application/json)
