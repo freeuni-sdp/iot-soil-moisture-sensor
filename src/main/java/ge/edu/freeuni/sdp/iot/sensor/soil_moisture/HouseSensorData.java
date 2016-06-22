@@ -18,7 +18,7 @@ public class HouseSensorData {
     public void put(Integer sensorid, SensorValue sensorValue) {
         data.put(sensorid, sensorValue);
     }
-    
+
 
     public SensorValue get(Integer sensorid) {
         if(data.containsKey(sensorid))
