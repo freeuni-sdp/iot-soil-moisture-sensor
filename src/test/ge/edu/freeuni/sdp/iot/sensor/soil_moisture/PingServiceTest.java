@@ -24,5 +24,4 @@ public class PingServiceTest extends JerseyTest {
         Response response = target("ping").request().get();
         assertEquals(200, response.getStatus());
     }
-
 }
