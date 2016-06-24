@@ -15,9 +15,13 @@ public class SensorValue {
     @XmlElement
     private int sensorId;
 
+    @XmlElement
+    private boolean available;
+
     public SensorValue(Double sensorValue, int sensorId) {
         this.sensorValue = sensorValue;
         this.sensorId = sensorId;
+        this.available = true;
     }
 
     public Double getSensorValue() {
@@ -26,6 +30,14 @@ public class SensorValue {
 
     public int getSensorId() {
         return sensorId;
+    }
+
+    public boolean getAvailable(){
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
 }

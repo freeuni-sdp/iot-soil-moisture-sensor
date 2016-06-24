@@ -17,7 +17,7 @@ public class HouseSingleSensorService {
     public SensorValue get(@PathParam("houseid") String houseid, @PathParam("sensorid") String sensorid) {
         HouseData houseData = HouseData.getInstance();
         HouseSensorData sensorData;
-        
+
 
 //        sensorData = houseData.get(houseIntegerid);
 //        SensorValue sensorValues = sensorData.get(sensorIntegerid);
