@@ -24,6 +24,8 @@ public class HouseSingleSensorService {
         sensorData = houseData.get(houseIntegerid);
         SensorValue sensorValues = sensorData.get(sensorIntegerid);
 
-        return sensorValues;
+        SensorValue dummySensor = new SensorValue(3.143, 1982);
+
+        return dummySensor;
     }
 }
