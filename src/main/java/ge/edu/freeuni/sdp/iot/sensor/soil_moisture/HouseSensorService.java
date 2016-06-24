@@ -16,10 +16,8 @@ public class HouseSensorService {
     public HouseSensorData get(@PathParam("houseid") String houseId) {
         HouseData data = HouseData.getInstance();
         HouseSensorData sensorData;
-        Integer id;
 
-        id = Integer.valueOf(houseId);
-        sensorData = data.get(id);
+        sensorData = data.get(houseId);
 
         SensorValue dummySensor1 = new SensorValue(27.32, 1252);
         SensorValue dummySensor2 = new SensorValue(14.21, 1452);
@@ -33,5 +31,4 @@ public class HouseSensorService {
 
         return housedata;
     }
-
 }

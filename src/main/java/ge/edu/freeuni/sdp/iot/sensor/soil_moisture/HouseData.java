@@ -15,7 +15,7 @@ public class HouseData {
     private static HouseData instance;
 
     @XmlElement
-    private ConcurrentHashMap<Integer, HouseSensorData> houseMap;
+    private ConcurrentHashMap<String, HouseSensorData> houseMap;
 
     private HouseData() {
         this.houseMap = new ConcurrentHashMap<>();
@@ -32,11 +32,11 @@ public class HouseData {
         return instance;
     }
 
-    public void put(Integer houseId, HouseSensorData data) {
+    public void put(String houseId, HouseSensorData data) {
         houseMap.put(houseId, data);
     }
 
-    public HouseSensorData get(Integer houseId) {
+    public HouseSensorData get(String houseId) {
         return houseMap.get(houseId);
     }
 
