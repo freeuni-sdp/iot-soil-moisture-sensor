@@ -5,8 +5,19 @@ HOST: https://iot-soil-moisture-sensor.herokuapp.com/
 
 IOT soil moisture sensor. Sends information about specific house and 
 specific sensor on demand, identified by houseid and sensorid. 
+
    If sensorid is not presented, then returns sensor values of all sensors
 of house identified by houseid.
+    
+    Returned sensor fields are: 
+        "sensorValue" : number value measured by sensor
+        "sensorId" : id of the sensor, which measured this sensorValue
+        "available" : true _ is sensor is available, or false. 
+    
+By default, sensor is always available, but after passing specific 
+period of time without getting new sensor value from sensor, we say that
+this sensor is not available and return false, until we get new data from 
+this sensor.
 
 ## Ping [/ping]
 
@@ -21,26 +32,35 @@ this house.
 
 ### get one sensor value [GET]
 
-If sensor is available returns with status code `200` and a `value`
-otherwise code is `503` with last recorded sensor value if available
-as `lastvalue`.
+If sensor is available returns with status code `200` and a `value`.
+If sensor is not available, service returns `503` with last recorded
+sensor value.
+If sensor id was incorrect, the return 404 status code, with sensorValue
+equals null, and available equals false.
 
 + Response 200 (application/json)
 
-        {
-            "value" : 27.234
+         {
+            "sensorValue":3.143,
+            "sensorId":1982,
+            "available":true
         }
+       
 
 + Response 503 (application/json)
 
         {
-            "lastvalue": 15.5
+            "sensorValue":3.143,
+            "sensorId":1982,
+            "available":false
         }
 
-+ Response 503 (application/json)
++ Response 404 (application/json)
 
-        {
-            "lastvalue": null
+         {
+            "sensorValue":null,
+            "sensorId":1982,
+            "available":false
         }
 
 ## Get Sensor Values [/house/{houseid}]
@@ -64,27 +84,44 @@ or `null`
 
 + Response 200 (application/json)
 
-        {   
-            "sensors" : [
+        {
+            "data":
+            {
+                "1252":
                 {
-                    "sensorid" : 15,
-                    "available" : "yes",
-                    "value" : 24.22
+                    "sensorValue":27.32,
+                    "sensorId":1252,
+                    "available":true
+                },
+                "1452":
+                {
+                    "sensorValue":14.21,
+                    "sensorId":1452,
+                    "available":true
+                },
+                "1982":
+                {
+                    "sensorValue":3.143,
+                    "sensorId":1982,
+                    "available":true
+                }
+            },
+            "values":
+            [
+                {
+                    "sensorValue":27.32,
+                    "sensorId":1252,
+                    "available":true
                 },
                 {
-                    "sensorid" : 16,
-                    "available" : "yes",
-                    "value" : 22.022
+                    "sensorValue":14.21,
+                    "sensorId":1452,
+                    "available":true
                 },
                 {
-                    "sensorid" : 17,
-                    "available" : "no",
-                    "lastvalue" : 17.02
-                },
-                {
-                    "sensorid" : 18,
-                    "available" : "no",
-                    "lastvalue" : null
+                    "sensorValue":3.143,
+                    "sensorId":1982,
+                    "available":true
                 }
             ]
         }
