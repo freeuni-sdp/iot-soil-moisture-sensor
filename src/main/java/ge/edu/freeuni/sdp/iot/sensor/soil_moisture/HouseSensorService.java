@@ -1,61 +1,37 @@
 package ge.edu.freeuni.sdp.iot.sensor.soil_moisture;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
  * Created by nika on 6/22/16.
  */
 @Path("/house/{houseid}")
+@Consumes( { MediaType.APPLICATION_JSON})
+@Produces( { MediaType.APPLICATION_JSON})
 public class HouseSensorService {
 
     @GET
-    public Response get(@PathParam("houseid") String houseId) {
+    public HouseSensorData get(@PathParam("houseid") String houseId) {
         HouseData data = HouseData.getInstance();
         HouseSensorData sensorData;
         Integer id;
-        try {
-            id = Integer.valueOf(houseId);
-            sensorData = data.get(id);
-            StringBuilder builder = new StringBuilder("{");
 
-            builder.append(" \"sensors\" : [ ");
-            boolean first = true;
-            for (SensorValue v : sensorData.getValues()) {
-                if (first)
-                    first = false;
-                else
-                    builder.append(", ");
+        id = Integer.valueOf(houseId);
+        sensorData = data.get(id);
 
-                builder.append("{");
-                Double value = v.getSensorValue();
-                builder.append("\"sensorid\": ").append(v.getSensorId()).append(", ");
+        SensorValue dummySensor1 = new SensorValue(27.32, 1252);
+        SensorValue dummySensor2 = new SensorValue(14.21, 1452);
+        SensorValue dummySensor3 = new SensorValue(3.143, 1982);
 
-                builder.append("\"available\": ");
-                if (value != null)
-                    builder.append("\"yes\"");
-                else
-                    builder.append("\"no\"");
-                builder.append(", ");
+        HouseSensorData housedata = new HouseSensorData();
 
-                if (value != null)
-                    builder.append("\"value\": ");
-                else
-                    builder.append("\"lastvalue\": ");
-                builder.append(value).append(", ");
+        housedata.put(1252, dummySensor1);
+        housedata.put(1452, dummySensor2);
+        housedata.put(1982, dummySensor3);
 
-                builder.append("}");
-            }
-            builder.append("]");
-
-            builder.append("}");
-
-            return Response.ok().entity(builder.toString()).build();
-        } catch (NumberFormatException|NullPointerException e) {
-            return Response.status(404).build();
-        }
+        return housedata;
     }
 
 }
