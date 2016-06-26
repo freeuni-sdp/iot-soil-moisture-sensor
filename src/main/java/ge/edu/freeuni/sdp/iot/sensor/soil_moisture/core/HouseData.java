@@ -1,21 +1,18 @@
-package ge.edu.freeuni.sdp.iot.sensor.soil_moisture;
+package ge.edu.freeuni.sdp.iot.sensor.soil_moisture.core;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorValue;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by nika on 6/22/16.
  */
-@XmlRootElement
 public class HouseData {
 
     /* Singleton instance */
-    @XmlElement
     private static HouseData instance;
 
-    @XmlElement
-    private ConcurrentHashMap<String, HouseSensorData> houseMap;
+    private ConcurrentHashMap<String, SensorValue> houseMap;
 
     private HouseData() {
         this.houseMap = new ConcurrentHashMap<>();
@@ -32,11 +29,11 @@ public class HouseData {
         return instance;
     }
 
-    public void put(String houseId, HouseSensorData data) {
+    public void put(String houseId, SensorValue data) {
         houseMap.put(houseId, data);
     }
 
-    public HouseSensorData get(String houseId) {
+    public SensorValue get(String houseId) {
         return houseMap.get(houseId);
     }
 
