@@ -20,11 +20,11 @@ Ping service, simply returns 200 status code
 
 + Response 200 (application/json)
 
-## Get Sensor Value [/house/{houseid}]
+## House Sensor [/house/{houseid}]
 
 houseid is string, identifier of the house.
 
-### get one house sensor value [GET]
+### Get house sensor value [GET]
 
 If sensor is available returns with status code `200` and a json body.
 If sensor is not available, service returns `404` without any body.
@@ -39,13 +39,16 @@ If sensor is not available, service returns `404` without any body.
        
 + Response 404 (application/json)
 
-## Post sensor value [/house/{houseid}/]
-houseid is string.
+### Update house sensor value [POST]
 
-### put one house sensor value [POST]
-If sensor value is seccessfully measured, 
+Updates house sensor value.
 
-## Post sensor value  (application/json)
+`sensorValue` floating point sensor value
+
+On success returns with `200` code, otherwise `503`
+
++ Request (application/json)
+
         {
             "sensorValue": 20.12
         }
