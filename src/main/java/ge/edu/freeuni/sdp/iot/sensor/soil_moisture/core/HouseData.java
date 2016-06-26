@@ -1,6 +1,6 @@
 package ge.edu.freeuni.sdp.iot.sensor.soil_moisture.core;
 
-import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorValue;
+import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorValueMessage;
 
 import java.util.concurrent.ConcurrentHashMap;
 

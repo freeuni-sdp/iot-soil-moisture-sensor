@@ -7,8 +7,8 @@ IOT soil moisture sensor. Sends information about specific house on
 demand, identified by houseid. 
     
     Returned sensor fields are: 
-        "sensorValue" : number value measured by sensor
-        "houseid" : id of the sensor, which measured this sensorValue
+        "sensorValueMessage" : number value measured by sensor
+        "houseid" : id of the sensor, which measured this sensorValueMessage
         "available" : true _ if sensor is available, or false otherwise. 
     
 We simulate sensor availability by random. Time after time we choose 
@@ -32,7 +32,7 @@ If sensor is not available, service returns `404` without any body.
 + Response 200 (application/json)
 
         {
-            "sensorValue" : 10.25,
+            "sensorValueMessage" : 10.25,
             "houseId" : "c637a8eb-5c1e-46fc-9de8-607df60df27a",
             "available" : true
         }
@@ -43,14 +43,14 @@ If sensor is not available, service returns `404` without any body.
 
 Updates house sensor value.
 
-`sensorValue` floating point sensor value
+`sensorValueMessage` floating point sensor value
 
 On success returns with `200` code, otherwise `503`
 
 + Request (application/json)
 
         {
-            "sensorValue": 20.12
+            "sensorValueMessage": 20.12
         }
 
 + Response 200 (application/json)

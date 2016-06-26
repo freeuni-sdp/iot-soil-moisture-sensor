@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * Created by khrak on 6/22/16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SensorValue {
+public class SensorValueMessage {
 
     @JsonProperty("sensorValue")
     private Double sensorValue;
@@ -19,10 +19,10 @@ public class SensorValue {
     @JsonProperty("available")
     private boolean available;
 
-    public SensorValue(String houseId, Double sensorValue) {
+    public SensorValueMessage(String houseId, Double sensorValue, boolean available) {
         this.houseId = houseId;
         this.sensorValue = sensorValue;
-        this.available = true;
+        this.available = available;
     }
 
     public Double getSensorValue() {
@@ -49,11 +49,10 @@ public class SensorValue {
         this.available = available;
     }
 
-    public static SensorValue fromJson(JSONObject object) {
-        SensorValue res = new SensorValue(object.getString("houseId"),
-                object.getDouble("sensorValue"));
-        res.setAvailable(object.getBoolean("available"));
-        return res;
+    public static SensorValueMessage fromJson(JSONObject object) {
+        return new SensorValueMessage(object.getString("houseId"),
+                object.getDouble("sensorValue"),
+                object.getBoolean("available"));
     }
 
 }

@@ -1,8 +1,9 @@
 package ge.edu.freeuni.sdp.iot.sensor.soil_moisture;
 
 import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.core.HouseData;
+import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.core.SensorValue;
 import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorRequest;
-import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorValue;
+import ge.edu.freeuni.sdp.iot.sensor.soil_moisture.model.SensorValueMessage;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -17,14 +18,14 @@ import javax.ws.rs.core.Response;
 public class HouseSensorService {
 
     @GET
-    public SensorValue get(@PathParam("houseid") String houseId) {
+    public SensorValueMessage get(@PathParam("houseid") String houseId) {
         HouseData houseData = HouseData.getInstance();
         SensorValue sensorValue = houseData.get(houseId);
 
         if (sensorValue == null)
             throw new NotFoundException();
 
-        return sensorValue;
+        return new SensorValueMessage(houseId, sensorValue.getSensorValue(), sensorValue.isAvailable());
     }
 
     @POST
@@ -33,7 +34,7 @@ public class HouseSensorService {
         SensorRequest request = SensorRequest.fromJson(new JSONObject(requestStr));
 
         HouseData houseData = HouseData.getInstance();
-        houseData.put(houseId, new SensorValue(houseId, request.getSensorValue()));
+        houseData.put(houseId, new SensorValue(request.getSensorValue(), houseId));
 
         return Response.ok().build();
     }
