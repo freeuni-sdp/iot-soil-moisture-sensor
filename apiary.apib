@@ -3,8 +3,8 @@ HOST: https://iot-soil-moisture-sensor.herokuapp.com/
 
 # soil-moisture-sensor
 
-IOT soil moisture sensor. Sends information about specific house on demand, 
-identified by houseid. 
+IOT soil moisture sensor. Sends information about specific house on 
+demand, identified by houseid. 
     
     Returned sensor fields are: 
         "sensorValue" : number value measured by sensor
@@ -38,3 +38,18 @@ If sensor is not available, service returns `404` without any body.
         }
        
 + Response 404 (application/json)
+
+## Post sensor value [/house/{houseid}/]
+houseid is string.
+
+### put one house sensor value [POST]
+If sensor value is seccessfully measured, 
+
+## Post sensor value  (application/json)
+        {
+            "sensorValue": 20.12
+        }
+
++ Response 200 (application/json)
+
++ Response 503 (application/json)
