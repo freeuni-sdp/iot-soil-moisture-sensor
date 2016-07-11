@@ -96,23 +96,6 @@ public class HouseSensorServiceTest extends JerseyTest {
     }
 
     @Test
-    public void postCheckStatusCodeFore404() throws Exception {
-        double value = 20.12;
-
-        String postBody = "{\"sensorValue\": " + value + "}";
-
-        when(data.contains(houseId)).thenReturn(false);
-
-        Response response;
-        response = target("/house/123").request()
-                .post(Entity.entity(postBody, MediaType.APPLICATION_JSON_TYPE));
-
-        assertEquals(404, response.getStatus());
-    }
-
-
-
-    @Test
     public void checkForCallingPutMethodOfHouseData() throws Exception {
         double value = 20.12;
 
