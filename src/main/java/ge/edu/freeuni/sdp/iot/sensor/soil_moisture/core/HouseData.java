@@ -11,6 +11,9 @@ public class HouseData {
 
     /* Singleton instance */
     private static HouseData instance;
+    private static HouseData testInstance;
+
+    private static boolean testMode = false;
 
     private ConcurrentHashMap<String, SensorValue> houseMap;
 
@@ -19,6 +22,11 @@ public class HouseData {
     }
 
     public static HouseData getInstance() {
+
+        if (testMode) {
+            return testInstance;
+        }
+
         if (instance == null) {
             synchronized (HouseData.class) {
                 if (instance == null)
@@ -27,6 +35,14 @@ public class HouseData {
         }
 
         return instance;
+    }
+
+    public static void setTestInstance(HouseData instance) {
+        testInstance = instance;
+    }
+
+    public static void setTestMode(boolean value) {
+        testMode = value;
     }
 
     public void put(String houseId, SensorValue data) {
