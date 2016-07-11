@@ -1,7 +1,5 @@
 package ge.edu.freeuni.sdp.iot.sensor.soil_moisture.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Created by nika on 6/26/16.
  */
@@ -42,4 +40,15 @@ public class SensorValue {
         return System.currentTimeMillis() - lastUpdateTime < availableTimeout;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SensorValue that = (SensorValue) o;
+
+        if (sensorValue != null ? !sensorValue.equals(that.sensorValue) : that.sensorValue != null) return false;
+        return houseId != null ? houseId.equals(that.houseId) : that.houseId == null;
+
+    }
 }

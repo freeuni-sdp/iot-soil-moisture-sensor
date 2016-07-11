@@ -34,9 +34,14 @@ public class HouseSensorService {
         SensorRequest request = SensorRequest.fromJson(new JSONObject(requestStr));
 
         HouseData houseData = HouseData.getInstance();
+
+        if(!houseData.contains(houseId))
+        {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        
         houseData.put(houseId, new SensorValue(request.getSensorValue(), houseId));
 
         return Response.ok().build();
     }
-
 }

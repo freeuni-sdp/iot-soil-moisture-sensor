@@ -53,4 +53,7 @@ public class HouseData {
         return houseMap.get(houseId);
     }
 
+    public boolean contains(String houseId) {
+        return houseMap.containsKey(houseId);
+    }
 }
